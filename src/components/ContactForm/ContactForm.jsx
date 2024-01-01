@@ -16,13 +16,22 @@ class ContactForm extends Component {
   handleAddName = event => {
     event.preventDefault();
     const nameId = event.currentTarget.elements.name.id;
-    const arrayContacts = this.props.contacts.find(contact =>
-      contact.name.includes(this.state.name)
+    const arrayContacts = this.props.contacts.find(
+      contact => contact.name === this.state.name
     );
-    
+    const arrayNumbers = this.props.contacts.find(
+      contact => contact.number === this.state.number
+    );
+
     if (arrayContacts) {
-      alert(`${this.state.name} is already in contacts`);
-      return
+      alert(
+        `${this.state.name} is already in contacts with number ${arrayContacts.number}`
+      );
+      return;
+    }
+    if (arrayNumbers) {
+      alert(`${this.state.number} is already in contact ${arrayNumbers.name}`);
+      return;
     }
 
     this.props.onSubmit({

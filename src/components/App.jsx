@@ -35,23 +35,25 @@ class App extends Component {
   };
 
   render() {
-    const filterLowerCase = this.state.filter.toLowerCase();
-    const sortedNames = this.state.contacts.filter(contact =>
+    const filter = this.state.filter;
+    const contacts = this.state.contacts;
+    const filterLowerCase = filter.toLowerCase();
+    const sortedNames = contacts.filter(contact =>
       contact.name.toLowerCase().includes(filterLowerCase)
     );
-    const length = this.state.contacts.length;
+    const length = contacts.length;
 
     return (
       <div className={css.container}>
         <h2 className={css.title}>Phonebook</h2>
         <ContactForm
           onSubmit={this.formSubmitHandler}
-          contacts={this.state.contacts}
+          contacts={contacts}
         />
         <h2 className={css.title}>Contacts</h2>
         {length > 0 ? (
           <>
-            <Filter value={this.state.filter} onChange={this.changeFilter} />
+            <Filter value={filter} onChange={this.changeFilter} />
             <ContactList
               sortedNames={sortedNames}
               onClick={this.deleteContact}
